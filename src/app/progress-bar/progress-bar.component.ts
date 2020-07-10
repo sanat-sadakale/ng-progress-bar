@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { ProgressBarConfig } from './progress-bar-config';
 
 @Component({
@@ -9,33 +9,79 @@ import { ProgressBarConfig } from './progress-bar-config';
 export class ProgressBarComponent implements OnInit {
 
   private _step: number;
-  public get max(): number {
-    return this.config.max;
+
+
+  private _id: number;
+  public get id(): number {
+    return this._id;
   }
+  @Input()
+  public set id(v: number) {
+    this._id = v;
+  }
+
+  private _progress: number;
   public get progress(): number {
-    return this.config.progress;
+    return this._progress ?? this.config.progress;
   }
+  @Input()
+  public set progress(v: number) {
+    this._progress = v ?? 0;
+  }
+
   public get animated(): boolean {
     return this.config.animated;
   }
   public get showText(): boolean {
     return this.config.showValue;
   }
+  @Input()
+  public set step(value: number) {
+    this._step = value ?? 0;
+  }
   public get step(): number {
-    return this.config.step;
+    return this._step ?? this.config.step;
+  }
+
+  private _type: string;
+  public get type(): string {
+    return this._type;
+  }
+  @Input()
+  public set type(v: string) {
+    this._type = v;
+  }
+
+
+  private _limit: number;
+  public get limit(): number {
+    return this._limit ?? this.config.limit;
+  }
+  @Input()
+  public set limit(v: number) {
+    this._limit = v ?? 1;
   }
   constructor(private config: ProgressBarConfig) {
     this._step = config.step;
+  }
+
+  ngOnInit(): void {
   }
   /**
    * updateProgress
    */
   public updateProgress(step: number, limit: number) {
     this._step = step;
+    this.limit = limit;
+    this.progress = this.getValue(this.progress + step, this.limit);
   }
 
+  private getValue = (input: number, max: number, min: number = 0) => Math.max(Math.min(input, max), min);
 
-  ngOnInit(): void {
+  /**
+   * getPercentValue
+   */
+  public getPercentValue(): number {
+    return 100 * this.getValue(this.progress, this.limit) / this.limit;
   }
-
 }

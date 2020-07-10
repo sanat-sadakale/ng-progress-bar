@@ -3,22 +3,21 @@
     <h3> {{title}}</h3>
   </header>
   <div class="content" role="main">
-    <span>progress bars with buttons here</span>
-    <ul>
-      <li *ngFor="let bar of barsData.bars">
-        <app-progress-bar> {{ bar }} </app-progress-bar>
-      </li>
-    </ul>
-    <ul>
-      <li *ngFor="let button of barsData.buttons; index as i;">
-        <button name="button_{{i}}" (click)="onButtonClick(i, button, barsData.limit)">{{button}}</button>
-
-      </li>
-    </ul>
+    <ng-container *ngFor="let bar of barsData.bars; index as i">
+      <app-progress-bar [id]="i" [progress]="bar"> {{ bar }} </app-progress-bar>
+    </ng-container>
+<div>
+    <select [(ngModel)]="selectBarId">
+      <option value=undefined>None</option>
+      <option *ngFor="let barRef of bars" [value]="barRef.id">Progress bar #{{barRef.id}}</option>
+    </select>
+      <ng-container *ngFor="let button of barsData.buttons;">
+        <button (click)="onButtonClick(0, button, barsData.limit)">{{button}}</button>
+      </ng-container>
 
   </div> <!-- Footer -->
   <footer>
-    Sanatkumar Sadakale
+   Written by <i>Sanatkumar Sadakale</i>
   </footer>
 
 </div>

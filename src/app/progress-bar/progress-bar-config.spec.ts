@@ -16,9 +16,8 @@ describe('ProgressBarConfig', () => {
 
   it('should have default values', () => {
     const config = new ProgressBarConfig();
-    expect(config.max).toBe(100);
+    expect(config.limit).toBe(100);
     expect(config.animated).toBe(true);
-    expect(config.textType).toBeUndefined();
     expect(config.type).toBeUndefined();
     expect(config.showValue).toBe(true);
     expect(config.step).toBe(1);
