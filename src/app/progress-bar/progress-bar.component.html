@@ -1,4 +1,5 @@
 
 <div class="container-light-grey">
-  <div class="progress bg-{{type}}" [style.width.%]="getPercentValue()">{{getPercentValue()}}%</div>
+  <div class="progress bg-{{type}}" [style.width.%]="getPercentValue()">
+    <span *ngIf="showText">{{getPercentValue()}}%</span></div>
 </div>

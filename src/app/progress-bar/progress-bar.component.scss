@@ -18,11 +18,14 @@ $inProgress: #4caf50;
 
 .container-light-grey {
   color: #000 !important;
-  background-color: #f1f1f1 !important;
+  border: .05em solid gray;
+  margin: 1em;
+  height: 2em;
 }
 .progress {
   text-align: center;
+  font-size: large;
   content: "";
-  display: table;
-  clear: both;
+  display: block;
+  height: 1.8em;
 }

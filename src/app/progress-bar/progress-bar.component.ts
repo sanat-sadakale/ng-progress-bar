@@ -10,7 +10,6 @@ export class ProgressBarComponent implements OnInit {
 
   private _step: number;
 
-
   private _id: number;
   public get id(): number {
     return this._id;
@@ -20,6 +19,9 @@ export class ProgressBarComponent implements OnInit {
     this._id = v;
   }
 
+  public get showText(): boolean {
+    return this.config.showText;
+  }
   private _progress: number;
   public get progress(): number {
     return this._progress ?? this.config.progress;
@@ -28,7 +30,7 @@ export class ProgressBarComponent implements OnInit {
   public set progress(v: number) {
     this._progress = v ?? 0;
     if (this._progress >= this.limit) {
-      this.type = 'full'
+      this.type = 'full';
     } else if (this._progress === 0) {
       this.type = 'empty';
     } else {
@@ -36,12 +38,6 @@ export class ProgressBarComponent implements OnInit {
     }
   }
 
-  public get animated(): boolean {
-    return this.config.animated;
-  }
-  public get showText(): boolean {
-    return this.config.showValue;
-  }
   @Input()
   public set step(value: number) {
     this._step = value ?? 0;
@@ -92,6 +88,6 @@ export class ProgressBarComponent implements OnInit {
    * getPercentValue
    */
   public getPercentValue(): number {
-    return 100 * this.getValue(this.progress, this.limit) / this.limit;
+    return Math.ceil((100 * this.getValue(this.progress, this.limit) / this.limit));
   }
 }
