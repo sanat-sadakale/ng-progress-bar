@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  barsEndpointUrl: 'http://pb-api.herokuapp.com/bars'
 };
