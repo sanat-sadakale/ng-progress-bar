@@ -4,6 +4,18 @@
   </header>
   <div class="content" role="main">
     <span>progress bars with buttons here</span>
+    <ul>
+      <li *ngFor="let bar of barsData.bars">
+        <app-progress-bar> {{ bar }} </app-progress-bar>
+      </li>
+    </ul>
+    <ul>
+      <li *ngFor="let button of barsData.buttons; index as i;">
+        <button name="button_{{i}}" (click)="onButtonClick(i, button, barsData.limit)">{{button}}</button>
+
+      </li>
+    </ul>
+
   </div> <!-- Footer -->
   <footer>
     Sanatkumar Sadakale
