@@ -1,4 +1,28 @@
-$danger: danger;
-.progress-bar-danger {
-  background-color: $danger;
+$danger: red;
+$empty: gray;
+$inProgress: #4caf50;
+
+.bg-full {
+  color: #fff !important;
+  background-color: $danger !important;
+}
+
+.bg-empty {
+  background-color: $empty !important ;
+}
+
+.bg-in-progress {
+  color: #fff !important;
+  background-color: $inProgress !important;
+}
+
+.container-light-grey {
+  color: #000 !important;
+  background-color: #f1f1f1 !important;
+}
+.progress {
+  text-align: center;
+  content: "";
+  display: table;
+  clear: both;
 }

@@ -27,6 +27,13 @@ export class ProgressBarComponent implements OnInit {
   @Input()
   public set progress(v: number) {
     this._progress = v ?? 0;
+    if (this._progress >= this.limit) {
+      this.type = 'full'
+    } else if (this._progress === 0) {
+      this.type = 'empty';
+    } else {
+      this.type = 'in-progress';
+    }
   }
 
   public get animated(): boolean {
@@ -74,6 +81,9 @@ export class ProgressBarComponent implements OnInit {
     this._step = step;
     this.limit = limit;
     this.progress = this.getValue(this.progress + step, this.limit);
+    if (this.progress >= this.limit) {
+      this.type = 'full';
+    }
   }
 
   private getValue = (input: number, max: number, min: number = 0) => Math.max(Math.min(input, max), min);
