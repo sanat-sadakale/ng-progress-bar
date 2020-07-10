@@ -5,8 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ProgressBarConfig {
   limit = 100;
-  animated = true;
-  showValue = true;
+  showText = true;
   progress = 0;
   step = 1;
   type: 'empty';

@@ -3,23 +3,31 @@
     <h3> {{title}}</h3>
   </header>
   <div class="content" role="main">
-    <ng-container *ngFor="let bar of barsData.bars; index as i">
-      <app-progress-bar [id]="i" [progress]="bar"> {{ bar }} </app-progress-bar>
-    </ng-container>
-<div>
-    <select [(ngModel)]="selectBarId">
-      <option value=undefined>None</option>
-      <option *ngFor="let barRef of bars" [value]="barRef.id">Progress bar #{{barRef.id}}</option>
-    </select>
-      <ng-container *ngFor="let button of barsData.buttons;">
-        <button (click)="onButtonClick(0, button, barsData.limit)">{{button}}</button>
+    <div *ngIf="isLoading; else loadingTemplate">
+      <ng-container *ngFor="let bar of barsData.bars; index as i">
+        <app-progress-bar [id]="i" [progress]="bar" [limit]="barsData.limit"> {{ bar }} </app-progress-bar>
       </ng-container>
+      <div class="action-bar">
+        <select [ngModel]="selectBarId" (ngModelChange)="onBarSelection($event)">
+          <option *ngFor="let barRef of bars" [value]="barRef.id">Progress bar #{{barRef.id}}</option>
+        </select>
+        <ng-container *ngFor="let button of barsData.buttons;">
+          <button (click)="onButtonClick(selectBarId, button, barsData.limit)">{{button>0? '+' + button : button}}</button>
+        </ng-container>
 
-  </div> <!-- Footer -->
-  <footer>
-   Written by <i>Sanatkumar Sadakale</i>
-  </footer>
+      </div>
+    </div>
+    <footer>
+      Written by <i>Sanatkumar Sadakale</i>
+    </footer>
 
-</div>
+  </div>
 
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
+
+  <ng-template #loadingTemplate>
+
+    <div class="loader">
+      Loading...
+    </div>
+  </ng-template>
